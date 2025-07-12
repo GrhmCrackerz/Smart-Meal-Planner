@@ -50,7 +50,8 @@ const WeeklyPlanner = ({
         </thead>
         <tbody>
           {meals.map((meal) => (
-            <tr key={meal}>
+            <tr key={meal} className={meal === 'Snack' ? 'snack-row' : ''}>
+
               <td><strong>{meal}</strong></td>
               {days.map((day) => {
                 const key = `${day}-${meal}`;

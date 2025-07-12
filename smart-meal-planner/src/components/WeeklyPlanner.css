@@ -1,69 +1,76 @@
 .weekly-planner {
-    padding: 2rem;
-    background-color: #fffaf4; /* warm off-white */
-    border-radius: 12px;
-    max-width: 100%;
-    overflow-x: auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    font-family: 'Segoe UI', sans-serif;
-  }
-  
-  .planner-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-  }
-  
-  .planner-table th,
-  .planner-table td {
-    border: 1px solid #f0e5da;
-    padding: 1rem;
-    min-width: 120px;
-    background-color: #fffdf9;
-  }
-  
-  .planner-table th {
-    background-color: #ffe6cc; /* soft peach */
-    color: #444;
-    font-weight: bold;
-    font-size: 1rem;
-  }
-  
-  .planner-table td:nth-child(even) {
-    background-color: #fff4e6; /* alternating peach-beige */
-  }
-  
-  .add-meal-btn {
-    background-color: #ffd1dc; /* pastel pink */
-    color: #5a3e36;
-    border: none;
-    padding: 0.5rem 0.75rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    font-weight: 600;
-  }
-  
-  .add-meal-btn:hover {
-    background-color: #ffb6c1; /* slightly stronger pink */
-  }
-  
-  td:first-child {
-    background-color: #f9f3e3; /* breakfast/lunch/dinner label bg */
-    font-weight: bold;
-    color: #3a2e2e;
-  }
-  
-  .remove-meal-btn {
-    background-color: #f08080;
-    color: white;
-    border: none;
-    padding: 0.3rem 0.6rem;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-left: 0.3rem;
-  }
-  
-  .remove-meal-btn:hover {
-    background-color: #e06666;
-  }
+  padding: 2rem;
+  background-color: #f5f7fa; /* neutral light gray background */
+  border-radius: 12px;
+  max-width: 100%;
+  overflow-x: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.planner-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.planner-table th,
+.planner-table td {
+  border: 1px solid #dee2e6;
+  padding: 1rem;
+  min-width: 120px;
+  background-color: #ffffff; /* base white */
+}
+
+.planner-table th {
+  background-color: #e3edf7; /* neutral cool header */
+  color: #333;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Alternate row coloring (non-snack) */
+.planner-table tr:nth-child(even):not(.snack-row) td {
+  background-color: #f0f0f0; /* light gray */
+}
+
+/* Highlight snack row uniformly */
+.planner-table .snack-row td {
+  background-color: #d6ecf9 !important; /* pale blue */
+}
+
+/* Label column (Breakfast, Lunch, etc.) */
+td:first-child {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  color: #2e2e2e;
+}
+
+.add-meal-btn {
+  background-color: #b2dfdb; /* soft teal */
+  color: #004d40;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-weight: 600;
+}
+
+.add-meal-btn:hover {
+  background-color: #80cbc4;
+}
+
+.remove-meal-btn {
+  background-color: #f08080;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 0.3rem;
+}
+
+.remove-meal-btn:hover {
+  background-color: #e06666;
+}
