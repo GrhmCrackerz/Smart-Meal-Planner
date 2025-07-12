@@ -1,27 +1,58 @@
 // src/components/MealSearch.jsx
-import React from "react";
+import React, { useState } from "react";
 
-const mockMeals = [
-    { id: 1, name: 'Chicken Tacos', servings: 4, ingredients: ['Chicken', 'Taco Shells', 'Lettuce', 'Cheese']},
-    { id: 2, name: 'Thai Fried Rice', servings: 3, ingredients: ['Rice', 'Egg', 'Carrot', 'Soy Sauce']},
-    { id: 3, name: 'Veggie Stir Fry', servings: 2, ingredients: ['Broccoli', 'Carrot', 'Bell Pepper', 'Soy Sauce']}
+// Example meal options
+const mealOptions = [
+  { name: "Chicken Tacos", ingredients: ["Chicken", "Tortilla", "Lettuce"] },
+  { name: "Spaghetti", ingredients: ["Pasta", "Tomato Sauce", "Ground Beef"] },
+  { name: "Salad", ingredients: ["Lettuce", "Tomato", "Cucumber", "Dressing"] },
 ];
 
 const MealSearch = ({ onSelect }) => {
-    return (
-        <div>
-            <h3>Select a Meal</h3>
-            <ul style={{ listStyle: 'none', padding: 0}}>
-                {mockMeals.map((meal) =>(
-                    <li key={meal.id} style={{ marginBottom: '1rem'}}>
-                        <strong>{meal.name}</strong> - {meal.servings} servings
-                        <br />
-                        <button onClick={() => onSelect(meal)}>Select</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+  // Track servings input per meal by index or name
+  const [servingsMap, setServingsMap] = useState({});
+
+  const handleChange = (mealName, value) => {
+    setServingsMap((prev) => ({
+      ...prev,
+      [mealName]: value,
+    }));
+  };
+
+  const handleSelect = (meal) => {
+    const servings = parseInt(servingsMap[meal.name]) || 1; // Default to 1 if empty
+    onSelect({ ...meal, servings });
+  };
+
+  return (
+    <div>
+      <h3>Select a Meal</h3>
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {mealOptions.map((meal, idx) => (
+          <li key={idx} style={{ marginBottom: "1rem", textAlign: "left" }}>
+            <strong>{meal.name}</strong>
+            <br />
+            Ingredients: {meal.ingredients.join(", ")}
+            <br />
+            <label>
+              Servings:{" "}
+              <input
+                type="number"
+                min="1"
+                value={servingsMap[meal.name] || ""}
+                onChange={(e) => handleChange(meal.name, e.target.value)}
+                style={{ width: "50px", marginLeft: "0.5rem" }}
+              />
+            </label>
+            <br />
+            <button className="button" onClick={() => handleSelect(meal)}>
+              Select
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default MealSearch;

@@ -7,33 +7,38 @@ import './WeeklyPlanner.css';
 import GroceryList from "./GroceryList";
 
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const meals = ['Breakfast', 'Lunch', 'Dinner'];
+const meals = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
 
 const WeeklyPlanner = ({
   plannedMeals,
   setPlannedMeals,
-  showGroceryList,
-  setShowGroceryList
+  //showGroceryList,
+  //setShowGroceryList
 }) => {
-    const [isModalOpen, setModalOpen] = useState(false);
-    const [selectedCell, setSelectedCell] = useState(null); // { day, meal}
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedCell, setSelectedCell] = useState(null); // { day, meal}
+  const totalMealSlots = days.length * meals.length;
+  const mealsPlannedCount = Object.keys(plannedMeals).length;
 
-    //Eventually store meals here!
-    const handleMealSelect = (meal) => {
-        const key = `${selectedCell.day}-${selectedCell.meal}`;
+  //Eventually store meals here!
+  const handleMealSelect = (meal) => {
+    const key = `${selectedCell.day}-${selectedCell.meal}`;
 
-        // Update the planned meal
-        setPlannedMeals((prev) => ({
-          ...prev,
-          [key]: meal,
-        }));
+    // Update the planned meal
+    setPlannedMeals((prev) => ({
+      ...prev,
+      [key]: meal,
+    }));
 
-        setModalOpen(false);
-    }
+    setModalOpen(false);
+  }
 
-    return (
+  return (
     <div className="weekly-planner">
       <h2>Weekly Meal Planner</h2>
+      <p style={{ margin: '1rem 0', fontWeight: 'bold' }}>
+        You've planned {mealsPlannedCount} out of {totalMealSlots} meals.
+      </p>
       <table className="planner-table">
         <thead>
           <tr>
@@ -69,29 +74,33 @@ const WeeklyPlanner = ({
                           Change
                         </button>{' '}
                         <button
-                          className="remove-meal-btn"
+                          className="secondary button"
                           onClick={() => {
-                            const key = `${day}-${meal}`;
-                            setPlannedMeals((prev) => {
-                              const newPlan = { ...prev };
-                              delete newPlan[key];
-                              return newPlan;
-                            });
+                            if (window.confirm(`Are you sure you want to remove the ${meal} for ${day}?`)) {
+                              const key = `${day}-${meal}`;
+                              setPlannedMeals((prev) => {
+                                const newPlan = { ...prev };
+                                delete newPlan[key];
+                                return newPlan;
+                              });
+                            }
                           }}
                         >
                           Remove
                         </button>
+
                       </div>
                     ) : (
                       <button
-                        className="add-meal-btn"
+                        className="button"
                         onClick={() => {
                           setSelectedCell({ day, meal });
                           setModalOpen(true);
                         }}
                       >
-                        + Add Meal
+                        {meal === 'Snack' ? '+ Add Snack' : '+ Add Meal'}
                       </button>
+
                     )}
 
                   </td>
@@ -102,13 +111,13 @@ const WeeklyPlanner = ({
         </tbody>
       </table>
 
-      <button
+      {/* <button
         className="add-meal-btn"
         style={{ marginTop: '1rem' }}
         onClick={() => setShowGroceryList((prev) => !prev)}
       >
         {showGroceryList ? 'Hide Grocery List' : 'View Grocery List'}
-      </button>
+      </button> */}
 
 
       {/* Modal with MealSearch inside */}

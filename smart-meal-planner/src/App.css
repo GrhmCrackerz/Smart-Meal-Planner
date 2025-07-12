@@ -44,15 +44,72 @@
 .app-layout {
   display: flex;
   align-items: flex-start;
-  gap: 2rem; /* space between planner and list */
+  gap: 2rem;
   padding: 2rem;
+  flex-wrap: wrap; /* allow stacking on smaller screens */
 }
 
-/* Optional: control width of each panel */
 .weekly-planner {
-  flex: 2;
+  flex: 3;
+  min-width: 0; /* important for overflow control */
+  overflow-x: auto; /* allow table to scroll internally if needed */
+}
+
+.planner-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
 }
 
 .grocery-list {
   flex: 1;
 }
+
+/* Show help section styling */
+.help-toggle-btn {
+  margin-bottom: 1rem;
+  background-color: #ffe5b4;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.help-section {
+  background-color: #fff8f2;
+  border: 1px solid #f2e6dc;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Button styling for consistency */
+.button {
+  background-color: #4CAF50; /* Green */
+  color: white;
+  padding: 0.5rem 1rem;
+  margin: 0.25rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+
+.button.secondary {
+  background-color: #f44336; /* Red */
+}
+
+.button.secondary:hover {
+  background-color: #d73833;
+}
+
+
