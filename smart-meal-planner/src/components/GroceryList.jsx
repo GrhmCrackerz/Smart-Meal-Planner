@@ -32,6 +32,9 @@ const GroceryList = ({ plannedMeals }) => {
   return (
     <div style={styles.container}>
       <h3>Grocery List</h3>
+      <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '1rem' }}>
+        Ingredient quantities are based on the total servings for all planned meals.
+      </p>
       <ul style={styles.list}>
         {Object.entries(ingredientCount).map(([ingredient, count], index) => (
           <li

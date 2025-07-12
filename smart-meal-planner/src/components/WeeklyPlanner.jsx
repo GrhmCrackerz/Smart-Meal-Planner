@@ -64,30 +64,36 @@ const WeeklyPlanner = ({
                         <br />
                         <small>{plannedMeal.servings} servings</small>
                         <br />
-                        <button
-                          className="add-meal-btn"
-                          onClick={() => {
-                            setSelectedCell({ day, meal });
-                            setModalOpen(true);
-                          }}
-                        >
-                          Change
-                        </button>{' '}
-                        <button
-                          className="secondary button"
-                          onClick={() => {
-                            if (window.confirm(`Are you sure you want to remove the ${meal} for ${day}?`)) {
-                              const key = `${day}-${meal}`;
-                              setPlannedMeals((prev) => {
-                                const newPlan = { ...prev };
-                                delete newPlan[key];
-                                return newPlan;
-                              });
-                            }
-                          }}
-                        >
-                          Remove
-                        </button>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', alignItems: 'center' }}>
+                          <button
+                            className="button edit"
+                            title="Change meal"
+                            onClick={() => {
+                              setSelectedCell({ day, meal });
+                              setModalOpen(true);
+                            }}
+                          >
+                            ✏️
+                          </button>
+                          <button
+                            className="button remove-soft"
+                            title="Remove meal"
+                            onClick={() => {
+                              if (window.confirm(`Are you sure you want to remove the ${meal} for ${day}?`)) {
+                                const key = `${day}-${meal}`;
+                                setPlannedMeals((prev) => {
+                                  const newPlan = { ...prev };
+                                  delete newPlan[key];
+                                  return newPlan;
+                                });
+                              }
+                            }}
+                          >
+                            🗑️
+                          </button>
+                        </div>
+
+
 
                       </div>
                     ) : (
@@ -122,7 +128,11 @@ const WeeklyPlanner = ({
 
       {/* Modal with MealSearch inside */}
       <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
-        <MealSearch onSelect={handleMealSelect} />
+        <MealSearch
+          onSelect={handleMealSelect}
+          selectedCell={selectedCell}
+          plannedMeals={plannedMeals}
+        />
       </Modal>
     </div>
   );

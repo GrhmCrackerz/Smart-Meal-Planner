@@ -8,7 +8,7 @@ const mealOptions = [
   { name: "Salad", ingredients: ["Lettuce", "Tomato", "Cucumber", "Dressing"] },
 ];
 
-const MealSearch = ({ onSelect }) => {
+const MealSearch = ({ onSelect, selectedCell, plannedMeals }) => {
   // Track servings input per meal by index or name
   const [servingsMap, setServingsMap] = useState({});
 
@@ -27,6 +27,26 @@ const MealSearch = ({ onSelect }) => {
   return (
     <div>
       <h3>Select a Meal</h3>
+      {selectedCell && (
+        <div style={{
+          marginBottom: '1rem',
+          fontWeight: 'bold',
+          backgroundColor: '#fff8f2',
+          padding: '0.5rem 1rem',
+          borderRadius: '6px',
+          border: '1px solid #f2e6dc'
+        }}>
+          Changing: {selectedCell.day} - {selectedCell.meal}
+        </div>
+      )}
+      {selectedCell && (
+        <div style={{ fontStyle: 'italic', marginBottom: '1rem', fontSize: '0.9rem' }}>
+          Changing: <strong>{selectedCell.meal}</strong> on <strong>{selectedCell.day}</strong><br />
+          Current: <strong>
+            {plannedMeals[`${selectedCell.day}-${selectedCell.meal}`]?.name || 'None'}
+          </strong> – {plannedMeals[`${selectedCell.day}-${selectedCell.meal}`]?.servings || '0'} servings
+        </div>
+      )}
       <ul style={{ listStyle: "none", padding: 0 }}>
         {mealOptions.map((meal, idx) => (
           <li key={idx} style={{ marginBottom: "1rem", textAlign: "left" }}>

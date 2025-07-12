@@ -1,9 +1,9 @@
 #root {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
+
 
 .logo {
   height: 6em;
@@ -43,23 +43,47 @@
 
 .app-layout {
   display: flex;
-  align-items: flex-start;
+  flex-wrap: wrap;
   gap: 2rem;
   padding: 2rem;
-  flex-wrap: wrap; /* allow stacking on smaller screens */
+  overflow-x: auto;
 }
 
+
 .weekly-planner {
-  flex: 3;
-  min-width: 0; /* important for overflow control */
-  overflow-x: auto; /* allow table to scroll internally if needed */
+  flex: 2;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
+
+.grocery-list {
+  flex: 1;
+  min-width: 300px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 
 .planner-table {
   width: 100%;
-  table-layout: fixed;
-  border-collapse: collapse;
+  table-layout: fixed; /* forces even column widths */
 }
+
+
+.planner-table th,
+.planner-table td {
+  border: 1px solid #d6dee4;
+  padding: 0.75rem;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.planner-table th {
+  background-color: #e3edf7; /* slightly blue header for clarity */
+  color: #333;
+}
+
 
 .grocery-list {
   flex: 1;
@@ -89,8 +113,8 @@
 
 /* Button styling for consistency */
 .button {
-  background-color: #4CAF50; /* Green */
-  color: white;
+  background-color: #b2dfdb; /* Soft teal/pastel green */
+  color: #004d40;             /* Darker teal for readability */
   padding: 0.5rem 1rem;
   margin: 0.25rem;
   border: none;
@@ -101,8 +125,9 @@
 }
 
 .button:hover {
-  background-color: #45a049;
+  background-color: #80cbc4; /* Slightly deeper pastel on hover */
 }
+
 
 .button.secondary {
   background-color: #f44336; /* Red */
@@ -112,4 +137,35 @@
   background-color: #d73833;
 }
 
+
+.button.view-toggle {
+  background-color: #0077b6; /* Teal/blue for visibility */
+  font-weight: bold;
+}
+
+.button.view-toggle:hover {
+  background-color: #005f87;
+}
+
+.button.edit {
+  background-color: #2196F3; /* soft blue */
+  color: white;
+}
+
+.button.edit:hover {
+  background-color: #1976D2;
+}
+
+.button.remove-soft {
+  background-color: #e57373; /* muted red */
+  color: white;
+}
+
+.button.remove-soft:hover {
+  background-color: #d32f2f;
+}
+
+body {
+  background-color: #dce3ec; /* a darker, cooler blue-gray to contrast content */
+}
 

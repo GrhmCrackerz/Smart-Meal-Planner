@@ -33,12 +33,12 @@ function App() {
       )}
 
       <button
-        className="add-meal-btn"
-        style={{ marginBottom: '1rem' }}
-        onClick={() => setShowGroceryList(prev => !prev)}
+        className="button view-toggle"
+        onClick={() => setShowGroceryList((prev) => !prev)}
       >
         {showGroceryList ? 'Hide Grocery List' : 'View Grocery List'}
       </button>
+
 
       <div className="app-layout">
         <WeeklyPlanner
